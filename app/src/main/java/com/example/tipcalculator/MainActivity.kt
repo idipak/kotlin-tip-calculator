@@ -1,5 +1,6 @@
 package com.example.tipcalculator
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.tipcalculator.databinding.ActivityMainBinding
@@ -15,10 +16,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.calculateButton.setOnClickListener{calculateTip()}
+
+        binding.buttonToPage2.setOnClickListener{
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun calculateTip(){
-        val stringInTexField = binding.costOfService.text.toString()
+        val stringInTexField = binding.costOfServiceEditText.editText!!.text.toString()
         val cost = stringInTexField.toDoubleOrNull() ?: return
         val selectedId = binding.tipOptions.checkedRadioButtonId
         val tipPercent = when(selectedId){
