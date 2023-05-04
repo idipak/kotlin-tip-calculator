@@ -3,6 +3,8 @@ package com.example.tipcalculator
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
+import com.example.tipcalculator.adapter.ItemAdapter
 import com.example.tipcalculator.data.DataSource
 
 class SecondActivity : AppCompatActivity() {
@@ -11,8 +13,12 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
-        val textView : TextView = findViewById(R.id.textView)
+        val myDataSet = DataSource().loadAffirmations()
 
-        textView.text = DataSource().loadAffirmations().size.toString()
+        val recycleView = findViewById<RecyclerView>(R.id.recycler_view)
+
+        recycleView.adapter = ItemAdapter(this, myDataSet)
+
+        recycleView.setHasFixedSize(true)
     }
 }
